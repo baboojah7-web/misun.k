@@ -1,0 +1,274 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* 2.1.1 색상 토큰 · 2.1.2 글자 · 2.1.3 모양 (요구사항 정의서 기준)
+   대비 측정값은 README "디자인 토큰 대비 측정"에 기록 */
+@theme inline {
+  --color-navy: #1e2b4a;
+  --color-ink-muted: #4b5563;
+  --color-cream: #fbf7ef;
+  --color-white: #ffffff;
+  --color-sky: #dcebf7;
+  --color-accent: #c2410c;
+  --color-accent-hover: #9a3412;
+  --color-kakao: #fee500;
+  --color-kakao-ink: #191919;
+  --color-field-1: #fbe3d3;
+  --color-field-2: #e2eedb;
+  --color-field-3: #e7e3f6;
+  --color-field-4: #f8edc8;
+  --color-field-5: #d9eef0;
+  --color-error: #b91c1c;
+  --color-line: #e7e0d2;
+
+  --font-sans: var(--font-pretendard), system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-heading: var(--font-sans);
+
+  --shadow-soft: 0 4px 20px rgba(30, 43, 74, 0.08);
+
+  /* shadcn/ui 부품이 쓰는 변수 → 우리 토큰에 연결 (라이트 모드 고정) */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-navy);
+  --color-popover: #ffffff;
+  --color-popover-foreground: var(--color-navy);
+  --color-card: #ffffff;
+  --color-card-foreground: var(--color-navy);
+  --color-primary: var(--color-navy);
+  --color-primary-foreground: #ffffff;
+  --color-muted: #f3eee3;
+  --color-muted-foreground: var(--color-ink-muted);
+  --color-border: var(--color-line);
+  --color-input: var(--color-line);
+  --color-ring: var(--color-navy);
+  --color-destructive: var(--color-error);
+  --radius-lg: 16px;
+}
+
+:root {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-navy);
+    font-size: 17px;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    -webkit-font-smoothing: antialiased;
+  }
+  * {
+    border-color: var(--color-line);
+  }
+  /* 2.1.3 포커스: 3px 남색 윤곽선 + 2px 간격, 제거 금지 */
+  :focus-visible {
+    outline: 3px solid var(--color-navy) !important;
+    outline-offset: 2px !important;
+  }
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--color-cream) !important;
+  }
+  /* FR-20: 상단 바(56px)에 구역 제목이 가려지지 않게 */
+  section[id],
+  [id="top"] {
+    scroll-margin-top: 72px;
+  }
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* iOS 자동 확대 방지 */
+  }
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .h1 {
+    font-size: clamp(30px, 8.5vw, 44px);
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .h2 {
+    font-size: clamp(24px, 6.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .stat-number {
+    font-size: clamp(48px, 14vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  /* 2.1.3 버튼: 주요 56px / 보조 48px, 글자 17px 굵게 */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 9999px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    transition:
+      background-color 200ms ease-out,
+      color 200ms ease-out,
+      border-color 200ms ease-out;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .btn-lg {
+    min-height: 56px;
+  }
+  .btn-accent {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .btn-accent:hover,
+  .btn-accent:active {
+    background: var(--color-accent-hover);
+  }
+  .btn-kakao {
+    background: var(--color-kakao);
+    color: var(--color-kakao-ink);
+  }
+  .btn-kakao:hover,
+  .btn-kakao:active {
+    background: #f5d800;
+  }
+  .btn-navy {
+    background: var(--color-navy);
+    color: #fff;
+  }
+  .btn-navy:hover,
+  .btn-navy:active {
+    background: #121b33;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--color-navy);
+    border: 2px solid var(--color-navy);
+  }
+  .btn-outline:hover,
+  .btn-outline:active {
+    background: rgba(30, 43, 74, 0.06);
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .section {
+    padding-block: 64px;
+  }
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 96px;
+    }
+  }
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      max-width: 1120px;
+      padding-inline: 32px;
+    }
+  }
+}
+
+/* FR-06 슬로건 띠: CSS 애니메이션만, 한 바퀴 약 36초 */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:active .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-static {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    display: none;
+  }
+  .marquee-static {
+    display: flex;
+  }
+}
+
+/* 후기 가로 스크롤: 스크롤바 숨김(스와이프는 유지) */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 2.1.4 움직임 줄이기: 모든 전환·애니메이션 제거 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* FR-03 진입 효과: 아래에서 위로 8px, 300ms, 순차 0.08초 (CSS만, 움직임 줄이기 시 없음) */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise-in {
+  animation: rise-in 300ms ease-out both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+}
