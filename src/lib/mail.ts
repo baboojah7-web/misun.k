@@ -12,9 +12,20 @@ export class MailConfigError extends Error {
 }
 
 export class MailSendError extends Error {
-  constructor() {
+  /** 원인 파악용 코드만 담습니다 (예: "EAUTH/535", "ETIMEDOUT"). 고객 정보는 담지 않습니다. */
+  constructor(readonly reason = "UNKNOWN") {
     super("MAIL_SEND_FAILED");
   }
+}
+
+/** nodemailer 오류에서 고객 정보가 없는 코드 값만 꺼냅니다. */
+function safeReason(error: unknown): string {
+  if (!error || typeof error !== "object") return "UNKNOWN";
+  const { code, responseCode, command } = error as { code?: unknown; responseCode?: unknown; command?: unknown };
+  const parts = [code, responseCode, command].filter(
+    (v): v is string | number => (typeof v === "string" && /^[A-Z0-9_ ]{1,20}$/.test(v)) || typeof v === "number",
+  );
+  return parts.length ? parts.join("/") : "UNKNOWN";
 }
 
 const kstFormatter = new Intl.DateTimeFormat("sv-SE", {
@@ -91,8 +102,8 @@ export async function sendInquiryMail(inquiry: Inquiry, receivedAt = new Date())
       subject,
       text,
     });
-  } catch {
-    // 원래 오류 객체에는 요청 내용이 들어 있을 수 있어 버리고 새 오류만 던집니다.
-    throw new MailSendError();
+  } catch (error) {
+    // 원래 오류 객체에는 요청 내용이 들어 있을 수 있어 코드 값만 남기고 버립니다.
+    throw new MailSendError(safeReason(error));
   }
 }

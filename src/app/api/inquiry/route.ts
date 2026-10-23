@@ -2,7 +2,7 @@
 // 이름·연락처·메모는 어떤 로그에도 남기지 않습니다.
 import { createHash } from "node:crypto";
 import { antiSpamSchema, inquirySchema } from "@/lib/schema";
-import { MailConfigError, sendInquiryMail } from "@/lib/mail";
+import { MailConfigError, MailSendError, sendInquiryMail } from "@/lib/mail";
 
 const MAX_BODY_BYTES = 8 * 1024;
 const MIN_ELAPSED_MS = 3000;
@@ -125,7 +125,11 @@ export async function POST(req: Request) {
     recent.set(fingerprint, now);
   } catch (error) {
     // 오류 종류만 남김 (입력값 없음)
-    console.error(`[inquiry] ${error instanceof MailConfigError ? "MAIL_NOT_CONFIGURED" : "MAIL_SEND_FAILED"}`);
+    const detail =
+      error instanceof MailConfigError
+        ? "MAIL_NOT_CONFIGURED"
+        : `MAIL_SEND_FAILED ${error instanceof MailSendError ? error.reason : "UNKNOWN"}`;
+    console.error(`[inquiry] ${detail}`);
     return json(500, { ok: false, code: "SEND_FAILED" });
   }
 
