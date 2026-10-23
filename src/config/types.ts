@@ -218,6 +218,7 @@ export type SiteConfig = {
 
   /** 신청 메일 본문의 항목 이름 (FR-14) */
   mail: {
+    fromName: string;
     subjectPrefix: string;
     receivedAt: string;
     name: string;

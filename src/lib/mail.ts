@@ -1,7 +1,7 @@
-// 신청 메일 전송 추상화 (FR-14). 발송 서비스는 D-01 기본값인 Resend를 씁니다.
+// 신청 메일 전송 추상화 (FR-14). 네이버 메일 SMTP로 팀장님 메일함에 보냅니다 (D-01).
 // 개인정보(이름·연락처·메모)는 절대 로그에 남기지 않습니다.
 import "server-only";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { site } from "@/config/site";
 import type { Inquiry } from "@/lib/schema";
 
@@ -67,15 +67,30 @@ export async function sendInquiryMail(inquiry: Inquiry, receivedAt = new Date())
     return;
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.INQUIRY_TO;
-  const from = process.env.INQUIRY_FROM;
-  if (!apiKey || !to || !from) throw new MailConfigError();
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!user || !pass) throw new MailConfigError();
+  const port = Number(process.env.SMTP_PORT ?? 465);
 
-  const resend = new Resend(apiKey);
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST ?? "smtp.naver.com",
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 15_000,
+    logger: false,
+  });
+
   try {
-    const { error } = await resend.emails.send({ from, to, subject, text });
-    if (error) throw new MailSendError();
+    await transporter.sendMail({
+      // 네이버는 보내는 주소가 로그인한 계정과 같아야 합니다.
+      from: { name: site.mail.fromName, address: process.env.INQUIRY_FROM ?? user },
+      to: process.env.INQUIRY_TO ?? user,
+      subject,
+      text,
+    });
   } catch {
     // 원래 오류 객체에는 요청 내용이 들어 있을 수 있어 버리고 새 오류만 던집니다.
     throw new MailSendError();
