@@ -11,8 +11,16 @@ const contact = {
   kakaoOpenChat: "https://open.kakao.com/o/sxlfkJTi", // ⚠️ 1:1 방인지 확인 (D-04)
 };
 
+/** 사이트 주소: NEXT_PUBLIC_SITE_URL → (Vercel) 배포 주소 → 로컬 */
+function siteUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelHost =
+    process.env.VERCEL_ENV === "production" ? process.env.VERCEL_PROJECT_PRODUCTION_URL : process.env.VERCEL_URL;
+  return vercelHost ? `https://${vercelHost}` : "http://localhost:3000";
+}
+
 const config = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: siteUrl(),
   indexable: false, // 회사 확인 전까지 false (D-07)
   pendingText: "(준비 중)",
 
