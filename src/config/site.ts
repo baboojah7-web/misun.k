@@ -66,7 +66,7 @@ const config = {
     ctaHint: "길게 쓰지 않으셔도 됩니다. 궁금한 점만 남겨 주세요.",
     photo: "/profile.jpg", // 예: "/profile.jpg" (D-09). 없으면 모노그램이 보입니다.
     photoAlt: "강미선 팀장 프로필 사진",
-    
+   monogram: "강", 
   },
 
   marquee: { enabled: true, text: "알고 준비할수록 달라집니다", repeat: 6 },
