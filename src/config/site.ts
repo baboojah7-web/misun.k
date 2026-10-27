@@ -262,8 +262,8 @@ const config = {
         summary: "급여·선별급여·비급여, 본인부담이 어떻게 다른지 한눈에 보기",
         date: "2026.10.27",
         href: "/%EC%95%94%EC%B9%98%EB%A3%8C%EB%B9%84.png",
-      },
-    ],
+      ],
+     },
 
   footer: {
     contactHeading: "연락처",
