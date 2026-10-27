@@ -42,13 +42,14 @@ export function About() {
             {stats.length > 0 && (
               <>
                 <h3 className="sr-only">{about.statsLabel}</h3>
-                <ul className="mt-5 space-y-1 text-[16px]">
+                <ul className="mt-6 space-y-2">
                   {stats.map((stat) => (
-                    <li key={stat.kind}>
-                      <span className="font-bold">{stat.label}</span>
-                      <span> · </span>
-                      <span className="font-semibold">{stat.value}</span>
-                      <span className="text-ink-muted"> · {stat.detail}</span>
+                    <li key={stat.kind} className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="text-[17px] font-bold">{stat.label}</span>
+                      <span className="rounded-full bg-[#1f2d52] px-4 py-1.5 text-[18px] font-bold text-white">
+                        {stat.value}
+                      </span>
+                      <span className="text-[16px] text-ink-muted">{stat.detail}</span>
                     </li>
                   ))}
                 </ul>
