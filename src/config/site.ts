@@ -261,7 +261,7 @@ const config = {
         title: "암 치료비, 제대로 알고 준비하기",
         summary: "급여·선별급여·비급여, 본인부담이 어떻게 다른지 한눈에 보기",
         date: "2026.10.27",
-        href: "/%EC%95%94%EC%B9%98%EB%A3%8C%EB%B9%84.png",
+        href: "https://misun-k.vercel.app/%EC%95%94%EC%B9%98%EB%A3%8C%EB%B9%84.png",
       },
     ],
   },
