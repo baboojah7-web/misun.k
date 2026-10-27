@@ -89,7 +89,7 @@ const config = {
   },
 
   chat: {
-    title: "강미선 팀장 상담, 그게 뭐예요?",
+    title: "강미선 팀장님, 상담 그게 뭐예요?",
     // ⚠️ 약속 내용은 실제로 지킬 수 있는지 확인 (NFR-AD-06)
     messages: [
       { from: "customer", text: "상담하면 꼭 가입해야 하나요?" },
