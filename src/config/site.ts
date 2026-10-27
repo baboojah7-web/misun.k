@@ -127,13 +127,6 @@ const config = {
     tags: ["보장", "노후대비", "법인", "사업자", "절세", "상속"],
     statsLabel: "한눈에 보는 강미선 팀장",
     stats: [
-      {
-        kind: "credentials",
-        value: "4",
-        label: "갖춘 자격",
-        detail: "생명/손해보험자격 · 탑컨설턴트 · 변액 · 치매케어컨설턴트",
-      },
-      { kind: "fields", value: "6", label: "살펴보는 분야", detail: "보장 · 노후 · 법인 · 사업자 · 절세 · 상속" },
       { kind: "region", value: "전국", label: "활동 지역", detail: "원하시면 대면 상담도 가능합니다" },
     ],
     kakaoCta: "카톡으로 물어보기",
