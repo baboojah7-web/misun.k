@@ -256,8 +256,14 @@ const config = {
     emptyText: "곧 유익한 글로 찾아뵙겠습니다.",
     // 최대 3개까지 보입니다. ⚠️ 글마다 광고 규정·회사 확인 필요
     // 예) { title: "글 제목", summary: "한 줄 요약", date: "2026.10.01", href: "https://blog.naver.com/..." },
-    items: [],
-  },
+    items:[
+      {
+        title: "암 치료비, 제대로 알고 준비하기",
+        summary: "급여·선별급여·비급여, 본인부담이 어떻게 다른지 한눈에 보기",
+        date: "2026.10.27",
+        href: "/%EC%95%94%EC%B9%98%EB%A3%8C%EB%B9%84.png",
+      },
+    ],
 
   footer: {
     contactHeading: "연락처",
