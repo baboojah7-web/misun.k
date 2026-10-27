@@ -3,12 +3,11 @@ import { KakaoLink } from "@/components/common/contact-buttons";
 import { ProfilePhoto } from "@/components/common/profile-photo";
 import { SectionTitle } from "@/components/common/section-title";
 import { credentialsConfirmed } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
-/** FR-10. 팀장님 소개와 숫자 카드 */
+/** FR-10. 팀장님 소개와 활동 지역 한 줄 안내 */
 export function About() {
   const { about } = site;
-  // 자격이 확정되지 않았으면(TODO:) 자격 카드와 자격 문구를 숨김
+  // 자격이 확정되지 않았으면(TODO:) 자격 문구를 숨김
   const stats = about.stats.filter((s) => s.kind !== "credentials" || credentialsConfirmed);
 
   return (
@@ -39,25 +38,24 @@ export function About() {
                 ))}
               </ul>
             </div>
+
+            {stats.length > 0 && (
+              <>
+                <h3 className="sr-only">{about.statsLabel}</h3>
+                <ul className="mt-5 space-y-1 text-[16px]">
+                  {stats.map((stat) => (
+                    <li key={stat.kind}>
+                      <span className="font-bold">{stat.label}</span>
+                      <span> · </span>
+                      <span className="font-semibold">{stat.value}</span>
+                      <span className="text-ink-muted"> · {stat.detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
-
-        <h3 className="sr-only">{about.statsLabel}</h3>
-        <ul className={cn("mt-10 grid gap-3", stats.length >= 3 ? "grid-cols-2 md:grid-cols-3" : "grid-cols-2")}>
-          {stats.map((stat, i) => (
-            <li
-              key={stat.kind}
-              className={cn(
-                "flex flex-col rounded-[28px] bg-cream p-5 lg:p-7",
-                stats.length >= 3 && i === stats.length - 1 && "col-span-2 md:col-span-1",
-              )}
-            >
-              <span className="stat-number">{stat.value}</span>
-              <span className="mt-1 text-[17px] font-bold">{stat.label}</span>
-              <span className="mt-1 text-[14px] leading-snug text-ink-muted">{stat.detail}</span>
-            </li>
-          ))}
-        </ul>
 
         <div className="mt-8 flex justify-center">
           <KakaoLink className="btn-lg w-full sm:w-auto sm:px-10" label={about.kakaoCta} />
