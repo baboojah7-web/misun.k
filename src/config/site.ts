@@ -271,7 +271,7 @@ const config = {
       },
      {
         title: "유전성 암이란",
-        summary: "유전성 암 제대로 알고 준비하자",
+        summary: "유전성 암 제대로 알고 준비하기",
         date: "2026.11.06",
         href: "https://misun-k.vercel.app/gene-cancer2.png",
       },
