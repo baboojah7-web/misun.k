@@ -258,7 +258,7 @@ const config = {
   },
 
   columns: {
-    title: "알아두면 좋은 보험 이야기",
+    title: "알아두면 좋은 건강과 보험 이야기",
     emptyText: "곧 유익한 글로 찾아뵙겠습니다.",
     // 최대 3개까지 보입니다. ⚠️ 글마다 광고 규정·회사 확인 필요
     // 예) { title: "글 제목", summary: "한 줄 요약", date: "2026.10.01", href: "https://blog.naver.com/..." },
