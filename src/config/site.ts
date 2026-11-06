@@ -202,6 +202,7 @@ const config = {
       { id: "care", label: "치매·간병 대비" },
       { id: "business", label: "사업자·법인" },
       { id: "tax", label: "절세·상속" },
+      { id: "claim", label: "보험청구" },
       { id: "other", label: "기타" },
     ],
     methods: [
