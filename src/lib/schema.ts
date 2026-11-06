@@ -2,7 +2,7 @@
 // 오류는 코드로만 표시하고, 실제 문구는 site.ts의 form.validation에서 가져옵니다.
 import { z } from "zod/mini";
 
-export const TOPIC_IDS = ["protect", "retirement", "care", "business", "tax", "other"] as const;
+export const TOPIC_IDS = ["protect", "retirement", "care", "business", "tax", "claim", "other"] as const;
 export const METHOD_IDS = ["phone", "kakao", "sms"] as const;
 export const TIME_IDS = ["any", "morning", "afternoon", "evening"] as const;
 
