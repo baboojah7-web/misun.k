@@ -1,7 +1,7 @@
 // 홈페이지 설정 파일(site.ts)의 형태를 정의합니다.
 // 필수 항목이 빠지면 `pnpm typecheck`가 실패합니다.
 
-export type FieldId = "protect" | "retirement" | "care" | "business" | "tax";
+export type FieldId = "protect" | "retirement" | "care" | "business" | "tax" | "claim";
 export type TopicId = FieldId | "other";
 export type MethodId = "phone" | "kakao" | "sms";
 export type TimeId = "any" | "morning" | "afternoon" | "evening";
