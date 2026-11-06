@@ -269,6 +269,12 @@ const config = {
         date: "2026.10.27",
         href: "https://misun-k.vercel.app/%EC%95%94%EC%B9%98%EB%A3%8C%EB%B9%84.png",
       },
+     {
+        title: "유전성 암이란",
+        summary: "유전성 암 제대로 알고 준비하자",
+        date: "2026.11.06",
+        href: "https://misun-k.vercel.app/gene-cancer2.png",
+      },
     ],
   },
 
