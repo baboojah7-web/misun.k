@@ -281,6 +281,12 @@ const config = {
         date: "2026.11.06",
         href: "https://misun-k.vercel.app/gene-cancer2.png",
       },
+      {
+          title: "보험청구, 필요한 서류 챙기기",
+          summary: "실비·진단비·수술비·치료비, 항목별로 필요한 서류를 한눈에 보기",
+          date: "2026.11.09",
+          href: "https://misun-k.vercel.app/claim.png.png",
+      },
     ],
   },
 
